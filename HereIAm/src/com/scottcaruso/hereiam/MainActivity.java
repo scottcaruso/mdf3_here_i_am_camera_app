@@ -1,7 +1,10 @@
 package com.scottcaruso.hereiam;
 
+import com.scottcaruso.camerafunctions.CameraIntent;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -10,6 +13,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+		Intent cameraActivity = new Intent(this,CameraIntent.class);
+		startActivityForResult(cameraActivity, 0);
     }
 
 
