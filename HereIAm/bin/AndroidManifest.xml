@@ -31,6 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.scottcaruso.camerafunctions.CameraIntent"></activity>
+        <service android:name="com.scottcaruso.geolocationfunctions.DataRetrievalService"></service>
     </application>
 
 </manifest>

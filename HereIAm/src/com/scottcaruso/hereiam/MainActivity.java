@@ -1,29 +1,37 @@
 package com.scottcaruso.hereiam;
 
-import java.util.List;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.scottcaruso.camerafunctions.CameraIntent;
+import com.scottcaruso.geolocationfunctions.DataRetrievalService;
 
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
 	public static LocationManager lm;
+	public static String lat;
+	public static String lon;
+	public static String response;
 	
-    @Override
+    @SuppressLint("HandlerLeak")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -31,38 +39,39 @@ public class MainActivity extends Activity {
         startLocationManager();
         if (lm != null)
         {
-        	Criteria criteria = new Criteria();
-        	criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-        	criteria.setCostAllowed(false);
-        	String providerName = lm.getBestProvider(criteria, true);
-        	final LocationListener listener = new LocationListener() {
-        		@Override
-        		public void onLocationChanged(Location location) 
-        		{
-        			Log.i("Info","Location changed!");
-        		}
-
+        	obtainGeoData();
+        	Handler retrievalHandler = new Handler()
+			{
 				@Override
-				public void onProviderDisabled(String provider) {
-					Log.i("Info","Provider Disabled!");
-				}
-
-				@Override
-				public void onProviderEnabled(String provider) {
-					Log.i("Info","Provider Enabled!");
-				}
-
-				@Override
-				public void onStatusChanged(String provider, int status,
-						Bundle extras) 
+				public void handleMessage(Message msg) 
 				{
-					Log.i("Info","Location changed!");
+					if (msg.arg1 == RESULT_OK)
+					{
+						try {
+							response = (String) msg.obj;
+						} catch (Exception e) {
+							Log.e("Error","There was a problem retrieving the json Response.");
+						}
+						String nullResponse = "{\"results\":[],\"count\":0}";
+						if (response.equals(nullResponse))
+						{
+							Toast toast = Toast.makeText(MainActivity.this, "There was a problem retrieving Geo data. Please try again later.", Toast.LENGTH_SHORT);
+							toast.show();
+						} else
+						{
+							Toast toast = Toast.makeText(MainActivity.this, "Success!", Toast.LENGTH_SHORT);
+							toast.show();
+						}
+					}
 				}
-        	};
-        	lm.requestSingleUpdate(criteria, listener, null);
-        	Location thisLocation = lm.getLastKnownLocation(providerName);
-        	String currentLocation = thisLocation.toString();
-        	Log.i("Current Location",currentLocation);
+			};
+			Messenger apiMessenger = new Messenger(retrievalHandler);
+			
+			Intent startDataService = new Intent(this, DataRetrievalService.class);
+			startDataService.putExtra(DataRetrievalService.MESSENGER_KEY, apiMessenger);
+			startDataService.putExtra(DataRetrievalService.LON_KEY,lon);
+			startDataService.putExtra(DataRetrievalService.LAT_KEY,lat);
+			this.startService(startDataService);
         }
         
 		Intent cameraActivity = new Intent(this,CameraIntent.class);
@@ -73,7 +82,6 @@ public class MainActivity extends Activity {
 		{
 			Log.i("Google Play","Services Connected");
 		}
-		
 		
     }
 
@@ -115,6 +123,45 @@ public class MainActivity extends Activity {
     public void startLocationManager()
     {
     	lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+    }
+    
+    public void obtainGeoData()
+    {
+    	Criteria criteria = new Criteria();
+    	criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+    	criteria.setCostAllowed(false);
+    	String providerName = lm.getBestProvider(criteria, true);
+    	final LocationListener listener = new LocationListener() {
+    		@Override
+    		public void onLocationChanged(Location location) 
+    		{
+    			Log.i("Info","Location changed!");
+    		}
+
+			@Override
+			public void onProviderDisabled(String provider) {
+				Log.i("Info","Provider Disabled!");
+			}
+
+			@Override
+			public void onProviderEnabled(String provider) {
+				Log.i("Info","Provider Enabled!");
+			}
+
+			@Override
+			public void onStatusChanged(String provider, int status,
+					Bundle extras) 
+			{
+				Log.i("Info","Location changed!");
+			}
+    	};
+    	lm.requestSingleUpdate(criteria, listener, null);
+    	Location thisLocation = lm.getLastKnownLocation(providerName);
+    	Double latDouble = thisLocation.getLatitude();
+    	Double lonDouble = thisLocation.getLongitude();
+    	lat = String.valueOf(latDouble);
+    	lon = String.valueOf(lonDouble);
+    	Log.i("Current Location","Lat = "+lat+"  Lon = "+lon);
     }
     
 }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.scottcaruso.geolocationfunctions.RetrieveDataFromSunlightLabs&apos; to &apos;RetrieveDataFromGeoNames&apos;&#x0A;- Original project: &apos;HereIAm&apos;&#x0A;- Original element: &apos;com.scottcaruso.geolocationfunctions.RetrieveDataFromSunlightLabs&apos;&#x0A;- Renamed element: &apos;com.scottcaruso.geolocationfunctions.RetrieveDataFromGeoNames&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;RetrieveDataFromSunlightLabs&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.scottcaruso.geolocationfunctions{RetrieveDataFromSunlightLabs.java[RetrieveDataFromSunlightLabs" matchStrategy="1" name="RetrieveDataFromGeoNames" qualified="false" references="true" similarDeclarations="false" stamp="1378871080091" textual="false" version="1.0"/>
+</session>
