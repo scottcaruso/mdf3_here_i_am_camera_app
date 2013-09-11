@@ -1,5 +1,6 @@
 package com.scottcaruso.hereiam;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.scottcaruso.camerafunctions.CameraIntent;
 
 import android.os.Bundle;
@@ -9,10 +10,9 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
-
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +20,12 @@ public class MainActivity extends Activity {
         
 		Intent cameraActivity = new Intent(this,CameraIntent.class);
 		startActivityForResult(cameraActivity, 0);
+		
+		boolean areWeConnectedToGoogle = servicesConnected();
+		if (areWeConnectedToGoogle == true)
+		{
+			Log.i("Google Play","Services Connected");
+		}
     }
 
 
@@ -36,9 +42,25 @@ public class MainActivity extends Activity {
     	Bundle extras = data.getExtras();
     	ImageView mainView = (ImageView) findViewById(R.id.mainImage);
     	Bitmap returnedBitmap = (Bitmap) extras.get("bitmap");
+    	if (returnedBitmap == null)
+    	{
+    		Log.i("Test","Photo cancelled!");
+    	}
     	mainView.setImageBitmap(returnedBitmap);
     	mainView.setVisibility(0);
-    	Log.i("Test","Bitmap returned!");
+    	//Log.i("Test","Bitmap returned!");
+    }
+    
+    private boolean servicesConnected()
+    {
+    	int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+    	if (resultCode == 0)
+    	{
+    		return true;
+    	} else
+    	{
+    		return false;
+    	}
     }
     
 }

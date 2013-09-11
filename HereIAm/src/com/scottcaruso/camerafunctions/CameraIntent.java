@@ -1,16 +1,10 @@
 package com.scottcaruso.camerafunctions;
 
-import com.scottcaruso.hereiam.R;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 public class CameraIntent extends Activity {
 	
@@ -38,8 +32,13 @@ public class CameraIntent extends Activity {
     
     private void getCameraPhoto(Intent intent) 
     {
-        Bundle extras = intent.getExtras();
-        imageBitmap = (Bitmap) extras.get("data");
+        try {
+			Bundle extras = intent.getExtras();
+			imageBitmap = (Bitmap) extras.get("data");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
 	@Override
