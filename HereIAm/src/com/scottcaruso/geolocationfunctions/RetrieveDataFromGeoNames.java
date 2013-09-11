@@ -13,11 +13,6 @@ import android.util.Log;
 
 public class RetrieveDataFromGeoNames {
 	
-	//This is separated into two separate functions simply to make it a little clearer what's going on for debugging.
-	//The first one is called by another class as a way to say, "Okay, here's the URL we need. Let's grab some data!"
-	//The second one is called by the first class, and it does the actual work of setting up an input stream.
-
-	
 	static String response = "";
 	static BufferedInputStream bin;
 	

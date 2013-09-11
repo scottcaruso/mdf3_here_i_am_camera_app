@@ -37,7 +37,7 @@ public class DataRetrievalService extends IntentService{
 		String latString = (String) extras.get(LAT_KEY);
 		String lonString = (String) extras.get(LON_KEY);
 		//Get a string back from SunLight labs using a custom Class housed in a different Java file.
-		String dataResponse = RetrieveDataFromGeoNames.retrieveData("http://api.geonames.org/findNearbyStreetsJSON?lat="+latString+"&lng="+lonString+"&maxRows=1&username=mygov");
+		String dataResponse = RetrieveDataFromGeoNames.retrieveData("http://api.geonames.org/findNearbyPlaceNameJSON?lat="+latString+"&lng="+lonString+"&maxRows=1&username=mygov");
 		Log.i("Info","Response received based on "+dataResponse);
 		//Pass the string back so that it can be parsed into JSON by the DisplayActivity
 		
