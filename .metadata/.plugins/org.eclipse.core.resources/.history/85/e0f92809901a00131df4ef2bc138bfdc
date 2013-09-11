@@ -6,8 +6,6 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.scottcaruso.camerafunctions.CameraIntent;
 
 import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
@@ -30,13 +28,12 @@ public class MainActivity extends Activity {
         startLocationManager();
         if (lm != null)
         {
+        	List<String> providers = lm.getAllProviders();
         	Criteria criteria = new Criteria();
         	criteria.setAccuracy(Criteria.ACCURACY_COARSE);
         	criteria.setCostAllowed(false);
         	String providerName = lm.getBestProvider(criteria, true);
-        	Location thisLocation = lm.getLastKnownLocation(providerName);
-        	String currentLocation = thisLocation.toString();
-        	Log.i("Current Location",currentLocation);
+        	
         }
         
 		Intent cameraActivity = new Intent(this,CameraIntent.class);
@@ -90,5 +87,15 @@ public class MainActivity extends Activity {
     {
     	lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
     }
+    
+    private final LocationListener listener = new LocationListener() 
+    {
+    	@Override
+    	public void onLocationChanged(Location location) {
+    	...
+    	}
+    }
+    	lm.requestLocationUpdates(provider,interval,distance,listener);
+	}	
     
 }

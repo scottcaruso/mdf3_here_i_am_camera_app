@@ -4,6 +4,6 @@ import android.location.LocationManager;
 
 public class GeolocationReceiver {
 	
-	
+	LocationManager lm;
 
 }
