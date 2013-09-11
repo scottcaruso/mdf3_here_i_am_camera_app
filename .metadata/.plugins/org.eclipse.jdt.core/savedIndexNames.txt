@@ -2,7 +2,6 @@ INDEX VERSION 1.126+/Users/scottcaruso/Desktop/Schoolwork/Month 23/week2/mdf3_he
 151801572.index
 1705481348.index
 3368361782.index
-1080650516.index
 4073165528.index
 1663679288.index
 1415693123.index

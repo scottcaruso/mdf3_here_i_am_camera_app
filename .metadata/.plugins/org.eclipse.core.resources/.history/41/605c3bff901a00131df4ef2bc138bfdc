@@ -35,31 +35,7 @@ public class MainActivity extends Activity {
         	criteria.setAccuracy(Criteria.ACCURACY_COARSE);
         	criteria.setCostAllowed(false);
         	String providerName = lm.getBestProvider(criteria, true);
-        	final LocationListener listener = new LocationListener() {
-        		@Override
-        		public void onLocationChanged(Location location) 
-        		{
-        			Log.i("Info","Location changed!");
-        		}
-
-				@Override
-				public void onProviderDisabled(String provider) {
-					Log.i("Info","Provider Disabled!");
-				}
-
-				@Override
-				public void onProviderEnabled(String provider) {
-					Log.i("Info","Provider Enabled!");
-				}
-
-				@Override
-				public void onStatusChanged(String provider, int status,
-						Bundle extras) 
-				{
-					Log.i("Info","Location changed!");
-				}
-        	};
-        	lm.requestSingleUpdate(criteria, listener, null);
+        	PendingIntent pi = (PendingIntent) this;
         	Location thisLocation = lm.getLastKnownLocation(providerName);
         	String currentLocation = thisLocation.toString();
         	Log.i("Current Location",currentLocation);
