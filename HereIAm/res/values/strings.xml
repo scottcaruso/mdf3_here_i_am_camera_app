@@ -4,5 +4,6 @@
     <string name="app_name">Here I Am</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="find_me_now_">Find Me Now!</string>
 
 </resources>

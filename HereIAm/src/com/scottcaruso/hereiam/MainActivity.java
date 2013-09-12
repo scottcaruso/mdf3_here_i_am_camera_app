@@ -24,6 +24,8 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -41,6 +43,25 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        Button findMeButton = (Button) findViewById(R.id.findmebutton);
+        findMeButton.setOnClickListener(new View.OnClickListener() 
+        {
+			
+			@Override
+			public void onClick(View v) 
+			{
+				if (currentNetworkState == "CONNECTED")
+				{
+					Intent cameraActivity = new Intent(MainActivity.this,CameraIntent.class);
+					startActivityForResult(cameraActivity, 0);
+				} else
+				{
+					Toast toast = Toast.makeText(MainActivity.this, "You currently do not have a network connection, so we cannot confidently say where you are! Please connect to a wireless network!", Toast.LENGTH_LONG);
+					toast.show();
+				}
+			}
+		});
         
         startLocationManager();
         if (lm != null)
@@ -79,9 +100,6 @@ public class MainActivity extends Activity {
 			startDataService.putExtra(DataRetrievalService.LAT_KEY,lat);
 			this.startService(startDataService);
         }
-        
-		Intent cameraActivity = new Intent(this,CameraIntent.class);
-		startActivityForResult(cameraActivity, 0);
 		
 		boolean areWeConnectedToGoogle = servicesConnected();
 		if (areWeConnectedToGoogle == true)
@@ -110,16 +128,18 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) 
     {
-    	Bundle extras = data.getExtras();
-    	ImageView mainView = (ImageView) findViewById(R.id.mainImage);
+    	Intent showDisplay = new Intent(this, DisplayActivity.class);
+    	startActivity(showDisplay);
+    	/*Bundle extras = data.getExtras();
+    	ImageView mainView = (ImageView) findViewById(R.id.logo);
     	Bitmap returnedBitmap = (Bitmap) extras.get("bitmap");
     	if (returnedBitmap == null)
     	{
     		Log.i("Test","Photo cancelled!");
     	}
-    	mainView.setImageBitmap(returnedBitmap);
-    	mainView.setVisibility(0);
-    	//Log.i("Test","Bitmap returned!");
+    	//mainView.setImageBitmap(returnedBitmap);
+    	//mainView.setVisibility(0);
+    	//Log.i("Test","Bitmap returned!");*/
     }
     
     private boolean servicesConnected()
