@@ -1,2 +1,8 @@
 1378871080091	Rename type 'RetrieveDataFromSunlightLabs'
 1378951731229	Extracts string 'Find Me Now!' into R.string.find_me_now_
+1378958170735	Rename resource 'abstract-q-g-640-480-4.jpg'
+1378958439498	Extracts string 'Placeholder status update string.' into R.string.placeholder_status_update_string_
+1378959004857	Extracts string 'Post to Facebook' into R.string.post_to_facebook
+1378959014225	Extracts string 'Post to Twitter' into R.string.post_to_twitter
+1378960014072	Delete element
+1378960063932	Delete element

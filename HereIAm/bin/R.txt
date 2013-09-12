@@ -53,14 +53,19 @@ int drawable common_signin_btn_text_pressed_light 0x7f020017
 int drawable here_i_am_icon 0x7f020018
 int drawable here_i_am_logo 0x7f020019
 int drawable ic_launcher 0x7f02001a
-int id action_settings 0x7f050007
+int drawable placeholder 0x7f02001b
+int id action_settings 0x7f05000b
+int id capturedImage 0x7f050007
+int id facebookbutton 0x7f050009
 int id findmebutton 0x7f050005
 int id hybrid 0x7f050004
 int id logo 0x7f050006
 int id none 0x7f050000
 int id normal 0x7f050001
 int id satellite 0x7f050002
+int id statusUpdate 0x7f050008
 int id terrain 0x7f050003
+int id twitterbutton 0x7f05000a
 int layout activity_main 0x7f030000
 int layout photo_and_location_display 0x7f030001
 int menu main 0x7f090000
@@ -89,6 +94,9 @@ int string common_signin_button_text 0x7f06000d
 int string common_signin_button_text_long 0x7f06000e
 int string find_me_now_ 0x7f060018
 int string hello_world 0x7f060017
+int string placeholder_status_update_string_ 0x7f060019
+int string post_to_facebook 0x7f06001a
+int string post_to_twitter 0x7f06001b
 int style AppBaseTheme 0x7f080000
 int style AppTheme 0x7f080001
 int[] styleable MapAttrs { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d }
