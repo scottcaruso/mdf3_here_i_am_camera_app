@@ -41,15 +41,6 @@ public class DisplayActivity extends Activity
 				toast.show();
 			}
 		});
-        
-        twitterButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Toast toast = Toast.makeText(DisplayActivity.this, "This button will post your photo and status update to Twitter. Coming soon!", Toast.LENGTH_LONG);
-				toast.show();
-			}
-		});
 	}
 	
 }
