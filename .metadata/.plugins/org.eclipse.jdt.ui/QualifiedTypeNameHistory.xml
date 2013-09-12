@@ -11,7 +11,6 @@
 <fullyQualifiedTypeName name="com.scottcaruso.camerafunctions.CameraIntent"/>
 <fullyQualifiedTypeName name="android.graphics.Bitmap"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="android.widget.ImageView"/>
 <fullyQualifiedTypeName name="android.app.DialogFragment"/>
 <fullyQualifiedTypeName name="android.app.Dialog"/>
 <fullyQualifiedTypeName name="com.google.android.gms.common.ConnectionResult"/>
@@ -32,9 +31,13 @@
 <fullyQualifiedTypeName name="android.net.ConnectivityManager"/>
 <fullyQualifiedTypeName name="android.net.NetworkInfo"/>
 <fullyQualifiedTypeName name="android.content.IntentFilter"/>
+<fullyQualifiedTypeName name="com.scottcaruso.hereiam.DisplayActivity"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="android.widget.ImageView"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="org.json.JSONArray"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="com.scottcaruso.hereiam.R.id"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
-<fullyQualifiedTypeName name="com.scottcaruso.hereiam.DisplayActivity"/>
-<fullyQualifiedTypeName name="android.content.Intent"/>
 </qualifiedTypeNameHistroy>

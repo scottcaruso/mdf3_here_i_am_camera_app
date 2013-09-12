@@ -6,6 +6,7 @@
 
     <ImageView
         android:id="@+id/capturedImage"
+        android:contentDescription="@string/placeholder"
         android:layout_width="231dp"
         android:layout_height="231dp"
         android:layout_gravity="center"

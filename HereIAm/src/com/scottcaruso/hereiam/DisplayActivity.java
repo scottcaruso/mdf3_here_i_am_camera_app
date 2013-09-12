@@ -1,6 +1,9 @@
+/* Scott Caruso
+ * MDF3 - 1309
+ * Week 2 - Here I Am Camera/GPS App
+ */
 package com.scottcaruso.hereiam;
 
-import com.scottcaruso.hereiam.MainActivity.NetworkReceiver;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -28,19 +31,23 @@ public class DisplayActivity extends Activity
 	{
         super.onCreate(savedInstanceState);
         
+        //Register the intentfilter so we can monitor the network here, too.
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         networkReceiver = new NetworkReceiver();
         this.registerReceiver(networkReceiver, filter);
         
+        //Get the picture and location that the user generated.
         Intent incomingIntent = getIntent();
         Bundle extras = incomingIntent.getExtras();
     	Bitmap returnedBitmap = (Bitmap) extras.get("bitmap");
     	String location = (String) extras.get("location");
-        
+    	
+    	//Display the picture
         setContentView(R.layout.photo_and_location_display);
         ImageView cameraImage = (ImageView) findViewById(R.id.capturedImage);
         cameraImage.setImageBitmap(returnedBitmap);
         
+        //Set a status update for the user
         TextView statusUpdate = (TextView) findViewById(R.id.statusUpdate);
         statusUpdate.setText("Here I am! You found me in " + location + ". #hereiam");
         
@@ -52,6 +59,7 @@ public class DisplayActivity extends Activity
 			@Override
 			public void onClick(View v) 
 			{
+				//Before trying to access FB or Twitter, verify that the connection still exists.
 				if (currentNetworkState == "CONNECTED")
 				{
 					Toast toast = Toast.makeText(DisplayActivity.this, "This button will post your photo and status update to Facebook. Coming soon!", Toast.LENGTH_LONG);

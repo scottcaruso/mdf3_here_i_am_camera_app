@@ -1,6 +1,6 @@
 /* Scott Caruso
- * Java II 1308
- * Week 3 Assignment
+ * MDF3 - 1309
+ * Week 2 - Here I Am Camera/GPS App
  */
 package com.scottcaruso.geolocationfunctions;
 

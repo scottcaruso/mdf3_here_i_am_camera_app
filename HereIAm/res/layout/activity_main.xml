@@ -19,6 +19,7 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
+        android:contentDescription="@string/main_logo"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

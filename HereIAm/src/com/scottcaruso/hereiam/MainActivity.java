@@ -1,3 +1,7 @@
+/* Scott Caruso
+ * MDF3 - 1309
+ * Week 2 - Here I Am Camera/GPS App
+ */
 package com.scottcaruso.hereiam;
 
 
@@ -30,7 +34,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
@@ -50,6 +53,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        //Initialize the button so you can actually use the app.
         Button findMeButton = (Button) findViewById(R.id.findmebutton);
         findMeButton.setOnClickListener(new View.OnClickListener() 
         {
@@ -57,10 +61,13 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) 
 			{
+				//Check to see if we have a connection or not based on what the network receiver is telling us.
 				if (currentNetworkState == "CONNECTED")
 				{
+					//If connection, start the camera activity
 					Intent cameraActivity = new Intent(MainActivity.this,CameraIntent.class);
 					startActivityForResult(cameraActivity, 0);
+					//Meanwhile, run Geolocation in the background.
 					runGeolocation();
 				} else
 				{
@@ -78,6 +85,7 @@ public class MainActivity extends Activity {
 		
     }
 
+    //Note - trying to run the connectivity intent and the camera intent in the onCreate didn't go well. I moved this to onStart and it seems to work fine.
     @Override
     protected void onStart ()
     {
@@ -97,19 +105,24 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) 
     {
+    	//Check to see which activity is coming back to the main view
+    	//0 = camera, 1 = display page
     	if (requestCode == 0)
     	{
     		Log.i("Request Code","Coming back from camera.");
     		Bundle extras = data.getExtras();
         	Bitmap returnedBitmap = (Bitmap) extras.get("bitmap");
+        	//Verify that we got a valid latitude and longitude from the geolocation
         	if (lat == null || lon == null)
         	{
 				Toast toast = Toast.makeText(MainActivity.this, "There was a problem retrieving your Geo data. Please check that your GPS is active and try again later.", Toast.LENGTH_SHORT);
 				toast.show();
         	} else
         	{
+        		//Verify that we got a valid bitmap back from the camera
         		if (returnedBitmap != null)
         		{
+        			//Package up the picture and the location and send it to the other activity
         			extras.putString("location", location);
         			Intent showDisplay = new Intent(this, DisplayActivity.class);
         			showDisplay.putExtras(extras);
@@ -222,7 +235,9 @@ public class MainActivity extends Activity {
  							toast.show();
  						} else
  						{
+ 							//When we get a response...
  							try {
+ 								//Try to parse it into a valid location plus state
 								JSONObject result = new JSONObject(response);
 								JSONArray resultArray = result.getJSONArray("geonames");
 								JSONObject thisLocation = resultArray.getJSONObject(0);

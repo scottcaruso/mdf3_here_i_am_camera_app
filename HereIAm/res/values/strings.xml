@@ -8,5 +8,7 @@
     <string name="placeholder_status_update_string_">Placeholder status update string.</string>
     <string name="post_to_facebook">Post to Facebook</string>
     <string name="post_to_twitter">Post to Twitter</string>
+    <string name="main_logo">Main Logo</string>
+    <string name="placeholder">Placeholder Picture</string>
 
 </resources>
