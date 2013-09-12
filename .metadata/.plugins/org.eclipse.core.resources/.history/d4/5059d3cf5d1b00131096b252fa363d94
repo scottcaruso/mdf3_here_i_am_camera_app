@@ -136,10 +136,7 @@ public class MainActivity extends Activity {
     	} else if (requestCode == 1)
     	{
     		Log.i("Request Code","Coming back from display.");
-    	} else
-    	{
-    		Log.i("Error","No request code found for the deleted activity.");
-    	}
+    	} 
     	/*Bundle extras = data.getExtras();
     	ImageView mainView = (ImageView) findViewById(R.id.logo);
     	Bitmap returnedBitmap = (Bitmap) extras.get("bitmap");

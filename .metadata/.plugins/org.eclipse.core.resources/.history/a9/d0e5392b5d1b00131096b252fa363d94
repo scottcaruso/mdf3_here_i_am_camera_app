@@ -129,17 +129,8 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) 
     {
     	Intent showDisplay = new Intent(this, DisplayActivity.class);
-    	startActivityForResult(showDisplay, 1);
-    	if (requestCode == 0)
-    	{
-    		Log.i("Request Code","Coming back from camera.");
-    	} else if (requestCode == 1)
-    	{
-    		Log.i("Request Code","Coming back from display.");
-    	} else
-    	{
-    		Log.i("Error","No request code found for the deleted activity.");
-    	}
+    	startActivity(showDisplay);
+    	Log.i("Request Code",requestCode.toString())
     	/*Bundle extras = data.getExtras();
     	ImageView mainView = (ImageView) findViewById(R.id.logo);
     	Bitmap returnedBitmap = (Bitmap) extras.get("bitmap");
