@@ -192,6 +192,7 @@ public class MainActivity extends Activity {
 				currentNetworkState = ni.getState().toString();
 			} catch (Exception e) {
 				currentNetworkState = "Not connected";
+				e.printStackTrace();
 			}
     		Log.i("Connection State",currentNetworkState);
     	}

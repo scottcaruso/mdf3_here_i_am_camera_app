@@ -89,13 +89,8 @@ public class DisplayActivity extends Activity
     	public void onReceive(Context context, Intent intent)
     	{
     		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-    		try {
-				NetworkInfo ni = cm.getActiveNetworkInfo();
-				currentNetworkState = ni.getState().toString();
-			} catch (Exception e) {
-				currentNetworkState = "Not connected";
-				e.printStackTrace();
-			}
+    		NetworkInfo ni = cm.getActiveNetworkInfo();
+    		currentNetworkState = ni.getState().toString();
     		Log.i("Connection State",currentNetworkState);
     	}
     }
